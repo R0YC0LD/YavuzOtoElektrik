@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yavuz Oto Elektrik - Suluova</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0a0f1a;
+        color: white;
+    }
+
+    header {
+        text-align: center;
+        padding: 30px 20px;
+        background: linear-gradient(135deg, #0033cc, #000000);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    header p {
+        opacity: 0.8;
+    }
+
+    .section {
+        padding: 25px 20px;
+        text-align: center;
+    }
+
+    .card {
+        background: #111827;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #1f2d40;
+    }
+
+    .name {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .number {
+        font-size: 18px;
+        margin-bottom: 12px;
+        color: #4da6ff;
+    }
+
+    .save-btn, .map-btn {
+        background: #0066ff;
+        border: none;
+        padding: 12px 18px;
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .save-btn:hover, .map-btn:hover {
+        background: #0052cc;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        opacity: 0.6;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+function saveVCard(name, phone) {
+    const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+TEL;TYPE=CELL:${phone}
+END:VCARD`;
+
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = name.replace(/\s+/g, "_") + ".vcf";
+    link.click();
+}
+
+function openMap() {
+    window.open("https://maps.google.com/?q=40.833955,35.647884", "_blank");
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    <h1>Yavuz Oto Elektrik</h1>
+    <p>Amasya / Suluova</p>
+</header>
+
+<div class="section">
+
+    <button class="map-btn" onclick="openMap()">
+        📍 Dükkanı Bul
+    </button>
+
+    <br><br>
+
+    <div class="card">
+        <div class="name">Mahmut Yavuz</div>
+        <div class="number">📞 0535 784 34 04</div>
+        <button class="save-btn" onclick="saveVCard('Mahmut Yavuz', '05357843404')">
+            Rehbere Kaydet
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="name">Mahmut Yavuz (2. Numara)</div>
+        <div class="number">📞 0542 533 85 63</div>
+        <button class="save-btn" onclick="saveVCard('Mahmut Yavuz', '05425338563')">
+            Rehbere Kaydet
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="name">Nadir Bulut Yavuz</div>
+        <div class="number">📞 0555 008 05 00</div>
+        <button class="save-btn" onclick="saveVCard('Nadir Bulut Yavuz', '05550080500')">
+            Rehbere Kaydet
+        </button>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 Yavuz Oto Elektrik - Suluova
+</footer>
+
+</body>
+</html>
