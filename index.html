@@ -3,80 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yavuz Oto Elektrik - Suluova</title>
+<title>Yavuz Oto Elektrik – Suluova</title>
 
 <style>
-  body { margin:0; font-family:Arial, sans-serif; background:#0a0f1a; color:white; }
-  header { text-align:center; padding:35px 20px; background:linear-gradient(135deg, #0033cc, #000); }
-  header h1 { margin:0; font-size:32px; font-weight:800; }
-  header p { opacity:0.8; font-size:15px; }
-  .section { padding:25px 20px; text-align:center; }
-  .map-btn, .save-btn {
-    background:#0066ff; border:none; padding:14px 20px; color:white;
-    font-size:17px; border-radius:12px; cursor:pointer; width:100%; font-weight:bold;
-  }
-  .map-btn:hover, .save-btn:hover { background:#004fcc; }
-  .card {
-    background:#111827; border-radius:14px; padding:20px; margin-bottom:22px;
-    border:1px solid #1f2d40;
-  }
-  .name { font-size:22px; font-weight:bold; margin-bottom:6px; }
-  .number { font-size:18px; margin-bottom:12px; color:#4da6ff; }
-  footer { text-align:center; padding:20px; opacity:0.6; font-size:14px; margin-top:40px; }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0b0b;
+        color: #ffffff;
+    }
+
+    header {
+        background: linear-gradient(135deg, #007bff, #000);
+        padding: 25px;
+        text-align: center;
+        color: #fff;
+        font-size: 26px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .section {
+        background: #111;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 18px;
+        border: 1px solid #222;
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #4aa3ff;
+        font-size: 22px;
+    }
+
+    .phone-card {
+        background: #0d0d0d;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #1c1c1c;
+        margin-bottom: 12px;
+    }
+
+    .phone-number {
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .save-btn {
+        margin-top: 10px;
+        padding: 10px 18px;
+        background: #007bff;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .save-btn:hover {
+        background: #0a8aff;
+    }
+
+    .map-btn {
+        width: 100%;
+        margin-top: 10px;
+        padding: 16px;
+        background: #00c853;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .map-btn:hover {
+        background: #04e463;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #888;
+        font-size: 14px;
+    }
 </style>
+</head>
+<body>
+
+<header>YAVUZ OTO ELEKTRİK – Suluova / Amasya</header>
+
+<div class="container">
+
+    <div class="section">
+        <h2>İletişim</h2>
+
+        <div class="phone-card">
+            <div class="phone-number">📞 Mahmut Yavuz — 0535 784 34 04</div>
+            <button class="save-btn" onclick="saveVcf('Mahmut Yavuz','05357843404')">Numarayı Kaydet</button>
+        </div>
+
+        <div class="phone-card">
+            <div class="phone-number">📞 Mahmut Yavuz (2) — 0542 533 85 63</div>
+            <button class="save-btn" onclick="saveVcf('Mahmut Yavuz','05425338563')">Numarayı Kaydet</button>
+        </div>
+
+        <div class="phone-card">
+            <div class="phone-number">📞 Nadir Bulut Yavuz — 0555 008 05 00</div>
+            <button class="save-btn" onclick="saveVcf('Nadir Bulut Yavuz','05550080500')">Numarayı Kaydet</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Dükkanı Bul</h2>
+        <button class="map-btn" onclick="window.location.href='https://maps.app.goo.gl/7X1UhZDmN1h3YZiD9'">
+            📍 Haritada Aç (Magosa, Kılıç Sk. No:8 – Suluova)
+        </button>
+    </div>
+
+</div>
+
+<footer>© 2025 Yavuz Oto Elektrik – Tüm Hakları Saklıdır</footer>
 
 <script>
-function saveVCard(name, phone) {
-  const vcard = `BEGIN:VCARD
+function saveVcf(name, phone) {
+    const vcfData =
+`BEGIN:VCARD
 VERSION:3.0
 FN:${name}
 TEL;TYPE=CELL:${phone}
 END:VCARD`;
-  const blob = new Blob([vcard], { type: "text/vcard" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = name.replace(/\s+/g, "_") + ".vcf";
-  link.click();
-}
 
-function openMap() {
-  window.open("https://maps.google.com/?q=40.8339,35.6483", "_blank");
+    const blob = new Blob([vcfData], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name.replace(/ /g, "_")}.vcf`;
+    document.body.appendChild(a);
+    a.click();
+
+    URL.revokeObjectURL(url);
 }
 </script>
-</head>
 
-<body>
-<header>
-  <h1>Yavuz Oto Elektrik</h1>
-  <p>Amasya / Suluova – Magosa, Kılıç Sk. No:8</p>
-</header>
-
-<div class="section">
-  <button class="map-btn" onclick="openMap()">
-    📍 DÜKKANI BUL (HARİTAYI AÇ)
-  </button>
-  <br><br>
-
-  <div class="card">
-    <div class="name">Mahmut Yavuz</div>
-    <div class="number">📞 0535 784 34 04</div>
-    <button class="save-btn" onclick="saveVCard('Mahmut Yavuz','05357843404')">Rehbere Kaydet</button>
-  </div>
-
-  <div class="card">
-    <div class="name">Mahmut Yavuz (2. Numara)</div>
-    <div class="number">📞 0542 533 85 63</div>
-    <button class="save-btn" onclick="saveVCard('Mahmut Yavuz (2. Numara)','05425338563')">Rehbere Kaydet</button>
-  </div>
-
-  <div class="card">
-    <div class="name">Nadir Bulut Yavuz</div>
-    <div class as="number">📞 0555 008 05 00</div>
-    <button class="save-btn" onclick="saveVCard('Nadir Bulut Yavuz','05550080500')">Rehbere Kaydet</button>
-  </div>
-
-</div>
-
-<footer>© 2025 Yavuz Oto Elektrik - Suluova</footer>
 </body>
 </html>
